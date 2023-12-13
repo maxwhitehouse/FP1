@@ -293,3 +293,51 @@ fetch('https://raw.githubusercontent.com/maxwhitehouse/Final-Project/main/test.g
     
         map2010.setView(harvardCoordinates, zoomLevel, { animate: true });
     }
+    var resetMap2010Button = L.Control.extend({
+        options: {
+            position: 'topright'
+        },
+    
+        onAdd: function (map) {
+            var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+            container.innerHTML = '<button onclick="resetMap2010()">Reset Map</button>';
+            return container;
+        }
+    });
+    
+    // Add the resetMap2010Button to map2022
+    (new resetMap2010Button()).addTo(map2022);
+    
+    // Function to reset map2010 to its initial position
+    function resetMap2010() {
+        var initialPosition = [39.8283, -98.5795]; // Replace with the initial coordinates of map2010
+        var initialZoom = 4; // Replace with the initial zoom level of map2010
+    
+        // Reset map2010
+        map2010.setView(initialPosition, initialZoom, { animate: true });
+  
+    }function showInitialPopup() {
+        var popupContent = "<p>Control both maps with the one on the left!<br> <br> Click anywhere on the left map to begin!</p>";
+    
+        var initialPopup = L.popup({
+            closeButton: false,
+            autoClose: false,
+            className: 'initial-popup'
+        })
+            .setLatLng(map2010.getCenter())
+            .setContent(popupContent)
+            .openOn(map2010);
+    
+        currentOpenPopup = initialPopup;
+    }
+    
+    // Function to close initial popup
+    function closeInitialPopup() {
+        if (currentOpenPopup) {
+            currentOpenPopup.close();
+            currentOpenPopup = null;
+        }
+    }
+    
+    // Call the function to display the initial popup when the page loads
+    showInitialPopup();

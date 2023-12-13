@@ -45,3 +45,11 @@
     margin-right: 5px;
     display: none; /* Initially hide buttons */
 }
+
+.initial-popup {
+    background-color: white;
+    border: 0px solid #ccc;
+    padding: 0px;
+    width: 500px;
+    text-align: center;
+}
